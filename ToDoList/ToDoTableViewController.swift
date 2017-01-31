@@ -9,7 +9,7 @@
 import UIKit
 import CoreData
 
-let numOfImportLevel:Int = 4
+public let numOfImportLevel:Int = 4
 
 class ToDoTableViewController: UITableViewController {
     
@@ -34,6 +34,7 @@ class ToDoTableViewController: UITableViewController {
         super.viewWillAppear(animated)
         
         fetchAll()
+        tableView.reloadData()
     }
 
     override func didReceiveMemoryWarning() {
@@ -64,6 +65,7 @@ class ToDoTableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: IdentifierOfCells.BasicCell.rawValue) ?? UITableViewCell(style: .value1, reuseIdentifier: IdentifierOfCells.BasicCell.rawValue)
         cell.textLabel?.text = thingsToDo[indexPath.section][indexPath.row].title
+        cell.detailTextLabel?.text = thingsToDo[indexPath.section][indexPath.row].detail
         return cell
     }
     
@@ -93,11 +95,13 @@ class ToDoTableViewController: UITableViewController {
         for i in 0..<numOfImportLevel {
             if let thing = NSEntityDescription.insertNewObject(forEntityName: "ThingToDo", into: managedContext) as? ThingToDo {
                 thing.title = "Task in level \(i)"
+                thing.detail = "detail"
                 thing.importantLevel = Int16(i)
                 thingsToDo[i].append(thing)
             }
         }
     }
+    
     
     /*
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {

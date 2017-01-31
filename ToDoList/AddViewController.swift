@@ -7,9 +7,15 @@
 //
 
 import UIKit
+import CoreData
 
 class AddViewController: UIViewController {
 
+    @IBOutlet weak var titleTextField: UITextField!
+    @IBOutlet weak var detailTextField: UITextField!
+    @IBOutlet weak var importLevelSegCtrl: UISegmentedControl!
+    let managedContext = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -22,7 +28,34 @@ class AddViewController: UIViewController {
     }
     
     @IBAction func submitPressed(_ sender: UIButton) {
-        _ = navigationController?.popViewController(animated: true)
+        if (titleTextField.text?.isEmpty)! || (detailTextField.text?.isEmpty)! {
+            var alertTitle = ""
+            if (titleTextField.text?.isEmpty)! {
+                alertTitle += titleTextField!.placeholder!
+            }
+            if (detailTextField.text?.isEmpty)! {
+                alertTitle += ", " + detailTextField.placeholder!
+            }
+            
+            alertTitle += " empty"
+            let alert = UIAlertController(title: alertTitle, message: nil, preferredStyle: .alert)
+            let action = UIAlertAction(title: "got it", style: .default, handler: nil)
+            alert.addAction(action)
+            present(alert, animated: true, completion: nil)
+        } else {
+            if let task = NSEntityDescription.insertNewObject(forEntityName: "ThingToDo", into: managedContext) as? ThingToDo {
+                task.title = titleTextField.text
+                task.detail = titleTextField.text
+                task.importantLevel = Int16(importLevelSegCtrl.selectedSegmentIndex)
+            }
+            do {
+                try managedContext.save()
+                //(UIApplication.shared.delegate as! AppDelegate).saveContext()
+            } catch {
+                print("failed to save context in adding tase")
+            }
+            _ = navigationController?.popViewController(animated: true)
+        }
     }
 
     /*
