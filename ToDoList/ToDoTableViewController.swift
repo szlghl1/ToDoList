@@ -45,12 +45,10 @@ class ToDoTableViewController: UITableViewController {
     // MARK: - Table view data source
 
     override func numberOfSections(in tableView: UITableView) -> Int {
-        // #warning Incomplete implementation, return the number of sections
         return numOfImportLevel
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        // #warning Incomplete implementation, return the number of rows
         if section >= thingsToDo.count {
             return 0
         } else {
@@ -102,7 +100,31 @@ class ToDoTableViewController: UITableViewController {
         }
     }
     
+    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
+        if editingStyle == .delete {
+            managedContext.delete(thingsToDo[indexPath.section][indexPath.row])
+            do {
+                try managedContext.save()
+            } catch {
+                print("failed to save context in deleting")
+            }
+            fetchSection(section: indexPath.section)
+            tableView.reloadSections([indexPath.section], with: UITableViewRowAnimation.automatic)
+        }
+    }
     
+    func fetchSection(section: Int) {
+        if section < numOfImportLevel {
+            let request:NSFetchRequest<ThingToDo> = ThingToDo.fetchRequest()
+            request.predicate = NSPredicate(format: "importantLevel = %d", section)
+            do {
+                try thingsToDo[section] = managedContext.fetch(request)
+            } catch {
+                print("failed to fetch section \(section)")
+            }
+        }
+    }
+
     /*
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "reuseIdentifier", for: indexPath)
