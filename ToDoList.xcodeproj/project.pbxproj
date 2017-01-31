@@ -7,13 +7,16 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		BEB11BB61E4003D000A632B5 /* ThingToDo+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEB11BB41E4003D000A632B5 /* ThingToDo+CoreDataClass.swift */; };
+		BEB11BB71E4003D000A632B5 /* ThingToDo+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEB11BB51E4003D000A632B5 /* ThingToDo+CoreDataProperties.swift */; };
 		BEF383961E3F00DA005562EB /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEF383951E3F00DA005562EB /* AppDelegate.swift */; };
-		BEF383981E3F00DA005562EB /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEF383971E3F00DA005562EB /* ViewController.swift */; };
 		BEF3839B1E3F00DA005562EB /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BEF383991E3F00DA005562EB /* Main.storyboard */; };
 		BEF3839E1E3F00DA005562EB /* ToDoList.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = BEF3839C1E3F00DA005562EB /* ToDoList.xcdatamodeld */; };
 		BEF383A01E3F00DA005562EB /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BEF3839F1E3F00DA005562EB /* Assets.xcassets */; };
 		BEF383A31E3F00DA005562EB /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BEF383A11E3F00DA005562EB /* LaunchScreen.storyboard */; };
 		BEF383AE1E3F00DA005562EB /* ToDoListTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEF383AD1E3F00DA005562EB /* ToDoListTests.swift */; };
+		BEF383B91E3F018F005562EB /* ToDoTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEF383B81E3F018F005562EB /* ToDoTableViewController.swift */; };
+		BEF383BB1E3F0585005562EB /* AddViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEF383BA1E3F0585005562EB /* AddViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -27,9 +30,10 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		BEB11BB41E4003D000A632B5 /* ThingToDo+CoreDataClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "ThingToDo+CoreDataClass.swift"; sourceTree = "<group>"; };
+		BEB11BB51E4003D000A632B5 /* ThingToDo+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "ThingToDo+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		BEF383921E3F00DA005562EB /* ToDoList.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ToDoList.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BEF383951E3F00DA005562EB /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		BEF383971E3F00DA005562EB /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		BEF3839A1E3F00DA005562EB /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		BEF3839D1E3F00DA005562EB /* ToDoList.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = ToDoList.xcdatamodel; sourceTree = "<group>"; };
 		BEF3839F1E3F00DA005562EB /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -38,6 +42,8 @@
 		BEF383A91E3F00DA005562EB /* ToDoListTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ToDoListTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		BEF383AD1E3F00DA005562EB /* ToDoListTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToDoListTests.swift; sourceTree = "<group>"; };
 		BEF383AF1E3F00DA005562EB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		BEF383B81E3F018F005562EB /* ToDoTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ToDoTableViewController.swift; sourceTree = "<group>"; };
+		BEF383BA1E3F0585005562EB /* AddViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -61,6 +67,7 @@
 		BEF383891E3F00D9005562EB = {
 			isa = PBXGroup;
 			children = (
+				BEF383C01E3FEFE6005562EB /* Model */,
 				BEF383941E3F00DA005562EB /* ToDoList */,
 				BEF383AC1E3F00DA005562EB /* ToDoListTests */,
 				BEF383931E3F00DA005562EB /* Products */,
@@ -80,8 +87,9 @@
 			isa = PBXGroup;
 			children = (
 				BEF383951E3F00DA005562EB /* AppDelegate.swift */,
-				BEF383971E3F00DA005562EB /* ViewController.swift */,
 				BEF383991E3F00DA005562EB /* Main.storyboard */,
+				BEF383BA1E3F0585005562EB /* AddViewController.swift */,
+				BEF383B81E3F018F005562EB /* ToDoTableViewController.swift */,
 				BEF3839F1E3F00DA005562EB /* Assets.xcassets */,
 				BEF383A11E3F00DA005562EB /* LaunchScreen.storyboard */,
 				BEF383A41E3F00DA005562EB /* Info.plist */,
@@ -97,6 +105,15 @@
 				BEF383AF1E3F00DA005562EB /* Info.plist */,
 			);
 			path = ToDoListTests;
+			sourceTree = "<group>";
+		};
+		BEF383C01E3FEFE6005562EB /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				BEB11BB41E4003D000A632B5 /* ThingToDo+CoreDataClass.swift */,
+				BEB11BB51E4003D000A632B5 /* ThingToDo+CoreDataProperties.swift */,
+			);
+			name = Model;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -202,8 +219,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				BEF383981E3F00DA005562EB /* ViewController.swift in Sources */,
 				BEF3839E1E3F00DA005562EB /* ToDoList.xcdatamodeld in Sources */,
+				BEB11BB61E4003D000A632B5 /* ThingToDo+CoreDataClass.swift in Sources */,
+				BEF383B91E3F018F005562EB /* ToDoTableViewController.swift in Sources */,
+				BEF383BB1E3F0585005562EB /* AddViewController.swift in Sources */,
+				BEB11BB71E4003D000A632B5 /* ThingToDo+CoreDataProperties.swift in Sources */,
 				BEF383961E3F00DA005562EB /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -410,6 +430,7 @@
 				BEF383B41E3F00DA005562EB /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		BEF383B51E3F00DA005562EB /* Build configuration list for PBXNativeTarget "ToDoListTests" */ = {
 			isa = XCConfigurationList;
@@ -418,6 +439,7 @@
 				BEF383B71E3F00DA005562EB /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 
