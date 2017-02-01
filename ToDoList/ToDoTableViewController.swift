@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Foundation
 import CoreData
 
 public let numOfImportLevel:Int = 4
@@ -22,7 +23,9 @@ class ToDoTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        tableView.tableFooterView = ColoredCircle.getCircleView(frame: CGRect(x: 0, y: 0, width: tableView.frame.width, height: 10), circleCenter: CGPoint(x: 5, y: 5), color: UIColor.red, radius: 5)
         preloadTestData()
+        
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
 
@@ -34,7 +37,6 @@ class ToDoTableViewController: UITableViewController {
         super.viewWillAppear(animated)
         
         fetchAll()
-        tableView.reloadData()
     }
 
     override func didReceiveMemoryWarning() {
@@ -72,17 +74,9 @@ class ToDoTableViewController: UITableViewController {
             
             let request:NSFetchRequest<ThingToDo> = ThingToDo.fetchRequest()
             
-            /*
-            request.predicate = NSPredicate(block: { (thingToEvaluate: Any?, forgetIt: [String : Any]?) -> Bool in
-                if let thing = thingToEvaluate as? ThingToDo {
-                    return thing.importantLevel == Int16(i)
-                } else {
-                    return false
-                }
-            })
- */
+            
+            //NSPredicates created with predicateWithBlock: cannot be used for Core Data fetch requests backed by a SQLite store.
             request.predicate = NSPredicate(format: "importantLevel = %d", i)
- 
             
             let thingsInThisLevel = try! managedContext.fetch(request)
             thingsToDo[i] = thingsInThisLevel
@@ -90,11 +84,21 @@ class ToDoTableViewController: UITableViewController {
     }
     
     func preloadTestData() {
+        struct wrappedFlag {
+            static var runned: Bool = false
+        }
+        if wrappedFlag.runned == true {
+            return
+        } else {
+            wrappedFlag.runned = true
+        }
         for i in 0..<numOfImportLevel {
             if let thing = NSEntityDescription.insertNewObject(forEntityName: "ThingToDo", into: managedContext) as? ThingToDo {
                 thing.title = "Task in level \(i)"
                 thing.detail = "detail"
                 thing.importantLevel = Int16(i)
+                thing.createTime = NSDate(timeIntervalSinceNow: 0)
+                thing.deadline = NSDate(timeIntervalSinceNow: 20000)
                 thingsToDo[i].append(thing)
             }
         }
@@ -112,7 +116,9 @@ class ToDoTableViewController: UITableViewController {
             tableView.reloadSections([indexPath.section], with: UITableViewRowAnimation.automatic)
         }
     }
-    
+    override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
+        return false
+    }
     func fetchSection(section: Int) {
         if section < numOfImportLevel {
             let request:NSFetchRequest<ThingToDo> = ThingToDo.fetchRequest()
@@ -124,7 +130,7 @@ class ToDoTableViewController: UITableViewController {
             }
         }
     }
-
+    
     /*
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "reuseIdentifier", for: indexPath)

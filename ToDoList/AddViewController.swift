@@ -14,14 +14,50 @@ class AddViewController: UIViewController {
     @IBOutlet weak var titleTextField: UITextField!
     @IBOutlet weak var detailTextField: UITextField!
     @IBOutlet weak var importLevelSegCtrl: UISegmentedControl!
+    @IBOutlet weak var deadlineDisplayLabel: UILabel!
+    var datePicker = UIDatePicker()
+    
     let managedContext = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
+        
+        let calendar = Calendar.current
+        let components = calendar.dateComponents([.year, .month, .day], from: Date())
+        var str = String(describing: components.year!)
+        str += "-\(components.month!)-\(components.day!)"
+        deadlineDisplayLabel.text = str
+        
+        let tapViewRecognizer = UITapGestureRecognizer(target: self, action: #selector(dismissInputTools))
+        view.addGestureRecognizer(tapViewRecognizer)
+        
+        deadlineDisplayLabel.isUserInteractionEnabled = true
+        let tapDDLRecognizer = UITapGestureRecognizer(target: self, action: #selector(deadlineLabelPressed))
+        deadlineDisplayLabel.addGestureRecognizer(tapDDLRecognizer)
     }
+    
+    @objc
+    func deadlineLabelPressed() {
+        datePicker.minimumDate = Date(timeIntervalSinceNow: 0)
+        datePicker.center = view.center
+        datePicker.backgroundColor = UIColor.white
+        datePicker.datePickerMode = .date
+        view.addSubview(datePicker)
+    }
+    
+    @objc
+    func dismissInputTools() {
+        view.endEditing(false)
+        datePicker.removeFromSuperview()
+        
+        let calendar = Calendar.current
+        let components = calendar.dateComponents([.year, .month, .day], from: datePicker.date)
+        var str = String(describing: components.year!)
+        str += "-\(components.month!)-\(components.day!)"
+        deadlineDisplayLabel.text = str
 
+    }
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -47,6 +83,8 @@ class AddViewController: UIViewController {
                 task.title = titleTextField.text
                 task.detail = titleTextField.text
                 task.importantLevel = Int16(importLevelSegCtrl.selectedSegmentIndex)
+                task.deadline = datePicker.date as NSDate?
+                task.createTime = Date() as NSDate?
             }
             do {
                 try managedContext.save()
