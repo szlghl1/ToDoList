@@ -10,8 +10,8 @@ import Foundation
 import UIKit
 
 class ColoredCircle: UIView{
-    static func getCircleView(frame: CGRect, circleCenter: CGPoint, color: UIColor, radius: CGFloat) -> UIView {
-        let view = ColoredCircleView(frame: frame, circleCenter: circleCenter, color: color, radius: radius)
+    static func getCircleView(coor: CGPoint, len: CGFloat, color: UIColor) -> UIView {
+        let view = ColoredCircleView(coor: coor, len: len, color: color)
         return view
     }
 
@@ -20,12 +20,12 @@ class ColoredCircle: UIView{
         var radius: CGFloat = 50
         var circleCenter: CGPoint = CGPoint(x: 0, y: 0)
         
-        init(frame: CGRect, circleCenter: CGPoint, color: UIColor, radius: CGFloat) {
+        init(coor: CGPoint, len: CGFloat, color: UIColor) {
+            let frame = CGRect(x: coor.x, y: coor.y, width: len, height: len)
             super.init(frame: frame)
             self.fillColor = color
-            self.radius = radius
-            self.frame = frame
-            self.circleCenter = circleCenter
+            self.radius = len / 2
+            self.circleCenter = CGPoint(x: len/2, y: len/2)
             self.backgroundColor = UIColor.clear
         }
         
@@ -34,12 +34,9 @@ class ColoredCircle: UIView{
         }
         
         override func draw(_ rect: CGRect) {
-            //let shape = CAShapeLayer(layer: layer)
             let path = UIBezierPath(arcCenter: circleCenter, radius: radius, startAngle: 0, endAngle: CGFloat(Double(2) * M_PI), clockwise: true)
-            //shape.path = path.CGPath;
             fillColor.setFill()
             path.fill()
-            //view.layer.mask = shape;
         }
     }
     

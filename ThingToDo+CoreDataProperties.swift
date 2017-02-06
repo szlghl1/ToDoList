@@ -21,5 +21,6 @@ extension ThingToDo {
     @NSManaged public var importantLevel: Int16
     @NSManaged public var deadline: NSDate?
     @NSManaged public var title: String?
+    @NSManaged public var group: Int16
 
 }

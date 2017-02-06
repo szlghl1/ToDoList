@@ -18,14 +18,16 @@ class ToDoTableViewController: UITableViewController {
     var thingsToDo:[[ThingToDo]] = Array(repeating: [ThingToDo](), count: numOfImportLevel)
     enum IdentifierOfCells: String {
         case BasicCell = "BasicCell"
+        case TaskCell = "TaskCell"
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        tableView.tableFooterView = ColoredCircle.getCircleView(frame: CGRect(x: 0, y: 0, width: tableView.frame.width, height: 10), circleCenter: CGPoint(x: 5, y: 5), color: UIColor.red, radius: 5)
+        //tableView.tableFooterView = ColoredCircle.getCircleView(frame: CGRect(x: 0, y: 0, width: tableView.frame.width, height: 10), circleCenter: CGPoint(x: 5, y: 5), color: UIColor.red)
         preloadTestData()
-        
+        fetchAll()
+        tableView.reloadData()
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
 
@@ -37,6 +39,7 @@ class ToDoTableViewController: UITableViewController {
         super.viewWillAppear(animated)
         
         fetchAll()
+        tableView.reloadData()
     }
 
     override func didReceiveMemoryWarning() {
@@ -63,10 +66,22 @@ class ToDoTableViewController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: IdentifierOfCells.BasicCell.rawValue) ?? UITableViewCell(style: .value1, reuseIdentifier: IdentifierOfCells.BasicCell.rawValue)
-        cell.textLabel?.text = thingsToDo[indexPath.section][indexPath.row].title
-        cell.detailTextLabel?.text = thingsToDo[indexPath.section][indexPath.row].detail
+        let cell = (tableView.dequeueReusableCell(withIdentifier: IdentifierOfCells.TaskCell.rawValue) ?? UITableViewCell(style: .value1, reuseIdentifier: IdentifierOfCells.TaskCell.rawValue)) as! TaskTableViewCell
+        let thing = thingsToDo[indexPath.section][indexPath.row]
+        cell.title = thing.title!
+        cell.detail = thing.detail!
+        cell.deadline = thing.deadline! as Date
+        cell.importLevel = Int(thing.importantLevel)
+        cell.group = Int(thing.group)
         return cell
+    }
+    
+    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 100
+    }
+    
+    override func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 100
     }
     
     func fetchAll() {
@@ -99,6 +114,7 @@ class ToDoTableViewController: UITableViewController {
                 thing.importantLevel = Int16(i)
                 thing.createTime = NSDate(timeIntervalSinceNow: 0)
                 thing.deadline = NSDate(timeIntervalSinceNow: 20000)
+                thing.group = Int16(i)
                 thingsToDo[i].append(thing)
             }
         }
@@ -116,9 +132,12 @@ class ToDoTableViewController: UITableViewController {
             tableView.reloadSections([indexPath.section], with: UITableViewRowAnimation.automatic)
         }
     }
-    override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
-        return false
-    }
+    
+    //should be uncommented later when I want to add editing task funciton
+//    override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
+//        return false
+//    }
+
     func fetchSection(section: Int) {
         if section < numOfImportLevel {
             let request:NSFetchRequest<ThingToDo> = ThingToDo.fetchRequest()
