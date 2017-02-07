@@ -165,19 +165,19 @@
                                                         <rect key="frame" x="0.0" y="0.0" width="266.33333333333331" height="30"/>
                                                         <nil key="textColor"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                        <textInputTraits key="textInputTraits"/>
+                                                        <textInputTraits key="textInputTraits" keyboardType="alphabet" returnKeyType="next"/>
                                                     </textField>
                                                     <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="detail" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="YFK-oe-c0j">
                                                         <rect key="frame" x="0.0" y="78.666666666666657" width="266.33333333333331" height="30.000000000000028"/>
                                                         <nil key="textColor"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                        <textInputTraits key="textInputTraits"/>
+                                                        <textInputTraits key="textInputTraits" keyboardType="alphabet" returnKeyType="next"/>
                                                     </textField>
                                                     <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" horizontalHuggingPriority="251" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="deadline" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="vMQ-DC-MW1">
                                                         <rect key="frame" x="0.0" y="157" width="266.33333333333331" height="30"/>
                                                         <nil key="textColor"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                        <textInputTraits key="textInputTraits"/>
+                                                        <textInputTraits key="textInputTraits" returnKeyType="next"/>
                                                     </textField>
                                                     <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="6a3-sR-QAy">
                                                         <rect key="frame" x="0.0" y="235.66666666666669" width="266.33333333333331" height="29"/>
@@ -233,36 +233,6 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="6Zu-2z-iv1" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2088.75" y="141.25"/>
-        </scene>
-        <!--TestVC View Controller-->
-        <scene sceneID="8Qd-su-wpO">
-            <objects>
-                <viewController id="fcM-Nq-5UC" customClass="testVCViewController" customModule="ToDoList" customModuleProvider="target" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="2Ku-w7-TK8"/>
-                        <viewControllerLayoutGuide type="bottom" id="Csi-Dm-QCh"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="cYR-Pf-d1U">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Kki-SX-q6P">
-                                <rect key="frame" x="128" y="259" width="206" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <nil key="textColor"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits"/>
-                            </textField>
-                        </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                    </view>
-                    <connections>
-                        <outlet property="txtfield" destination="Kki-SX-q6P" id="kD7-Ra-w8w"/>
-                    </connections>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="hpq-7a-H9Z" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="1988" y="824"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="xXE-if-cx9">

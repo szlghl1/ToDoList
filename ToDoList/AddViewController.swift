@@ -9,7 +9,7 @@
 import UIKit
 import CoreData
 
-class AddViewController: UIViewController {
+class AddViewController: UIViewController, UITextFieldDelegate {
 
     @IBOutlet weak var titleTextField: UITextField!
     @IBOutlet weak var detailTextField: UITextField!
@@ -25,10 +25,12 @@ class AddViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        //initialize text field delegate
+        titleTextField.delegate = self
+        detailTextField.delegate = self
+        
         //initialize deadline label context
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateStyle = .long
-        deadlineTextField.placeholder = dateFormatter.string(from: Date())
+        deadlineTextField.placeholder = formatDate(Date())
         
         //dismiss input when touch
         let tapViewRecognizer = UITapGestureRecognizer(target: self, action: #selector(dismissInputTools))
@@ -39,24 +41,37 @@ class AddViewController: UIViewController {
         datePicker.datePickerMode = .date
         datePicker.addTarget(self, action: #selector(updateDeadline(sender:)), for: UIControlEvents.valueChanged)
         let toolbar = UIToolbar()
-        toolbar.isTranslucent = false
         let doneButton = UIBarButtonItem(title: "Done", style: .done, target: self, action: #selector(dismissInputTools))
+        toolbar.isUserInteractionEnabled = true
         toolbar.setItems([doneButton], animated: true)
+        toolbar.sizeToFit()
         deadlineTextField.inputView = datePicker
         deadlineTextField.inputAccessoryView = toolbar
     }
     
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        switch textField {
+        case titleTextField:
+            titleTextField.resignFirstResponder()
+            detailTextField.becomeFirstResponder()
+        case detailTextField:
+            detailTextField.resignFirstResponder()
+            deadlineTextField.becomeFirstResponder()
+        default:
+            dismissInputTools()
+        }
+        return true
+    }
+    
     @objc
     func dismissInputTools() {
+        updateDeadline(sender: datePicker)
         view.endEditing(false)
     }
     
     func updateDeadline(sender: UIDatePicker) {
-        print("called")
         deadline = sender.date
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateStyle = .long
-        deadlineTextField.text = dateFormatter.string(from: deadline)
+        deadlineTextField.text = formatDate(deadline)
     }
     
     override func didReceiveMemoryWarning() {
@@ -91,10 +106,16 @@ class AddViewController: UIViewController {
             do {
                 try managedContext.save()
             } catch {
-                print("failed to save context in adding tase")
+                print("failed to save context in adding task")
             }
             _ = navigationController?.popViewController(animated: true)
         }
+    }
+    
+    func formatDate(_ date: Date) -> String {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateStyle = .long
+        return dateFormatter.string(from: date)
     }
 
     /*
