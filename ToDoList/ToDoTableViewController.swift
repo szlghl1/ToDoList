@@ -24,10 +24,10 @@ class ToDoTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        //tableView.tableFooterView = ColoredCircle.getCircleView(frame: CGRect(x: 0, y: 0, width: tableView.frame.width, height: 10), circleCenter: CGPoint(x: 5, y: 5), color: UIColor.red)
-        preloadTestData()
+        //preloadTestData()
         fetchAll()
         tableView.reloadData()
+        
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
 
@@ -77,11 +77,11 @@ class ToDoTableViewController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 100
+        return 70
     }
     
     override func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 100
+        return 70
     }
     
     func fetchAll() {
