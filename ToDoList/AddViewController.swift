@@ -14,48 +14,49 @@ class AddViewController: UIViewController {
     @IBOutlet weak var titleTextField: UITextField!
     @IBOutlet weak var detailTextField: UITextField!
     @IBOutlet weak var importLevelSegCtrl: UISegmentedControl!
-    @IBOutlet weak var deadlineDisplayLabel: UILabel!
-    var datePicker = UIDatePicker()
+    @IBOutlet weak var deadlineTextField: UITextField!
+    //group
     
+    @IBOutlet weak var groupSegCtrl: UISegmentedControl!
     let managedContext = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
+    var deadline = Date()
+    let datePicker = UIDatePicker()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        let calendar = Calendar.current
-        let components = calendar.dateComponents([.year, .month, .day], from: Date())
-        var str = String(describing: components.year!)
-        str += "-\(components.month!)-\(components.day!)"
-        deadlineDisplayLabel.text = str
+        //initialize deadline label context
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateStyle = .long
+        deadlineTextField.placeholder = dateFormatter.string(from: Date())
         
+        //dismiss input when touch
         let tapViewRecognizer = UITapGestureRecognizer(target: self, action: #selector(dismissInputTools))
         view.addGestureRecognizer(tapViewRecognizer)
         
-        deadlineDisplayLabel.isUserInteractionEnabled = true
-        let tapDDLRecognizer = UITapGestureRecognizer(target: self, action: #selector(deadlineLabelPressed))
-        deadlineDisplayLabel.addGestureRecognizer(tapDDLRecognizer)
-    }
-    
-    @objc
-    func deadlineLabelPressed() {
-        datePicker.minimumDate = Date(timeIntervalSinceNow: 0)
-        datePicker.center = view.center
-        datePicker.backgroundColor = UIColor.white
+        //setup datePicker and deadlineTextField
+        datePicker.minimumDate = Date()
         datePicker.datePickerMode = .date
-        view.addSubview(datePicker)
+        datePicker.addTarget(self, action: #selector(updateDeadline(sender:)), for: UIControlEvents.valueChanged)
+        let toolbar = UIToolbar()
+        toolbar.isTranslucent = false
+        let doneButton = UIBarButtonItem(title: "Done", style: .done, target: self, action: #selector(dismissInputTools))
+        toolbar.setItems([doneButton], animated: true)
+        deadlineTextField.inputView = datePicker
+        deadlineTextField.inputAccessoryView = toolbar
     }
     
     @objc
     func dismissInputTools() {
         view.endEditing(false)
-        datePicker.removeFromSuperview()
-        
-        let calendar = Calendar.current
-        let components = calendar.dateComponents([.year, .month, .day], from: datePicker.date)
-        var str = String(describing: components.year!)
-        str += "-\(components.month!)-\(components.day!)"
-        deadlineDisplayLabel.text = str
-
+    }
+    
+    func updateDeadline(sender: UIDatePicker) {
+        print("called")
+        deadline = sender.date
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateStyle = .long
+        deadlineTextField.text = dateFormatter.string(from: deadline)
     }
     
     override func didReceiveMemoryWarning() {
@@ -83,12 +84,12 @@ class AddViewController: UIViewController {
                 task.title = titleTextField.text
                 task.detail = titleTextField.text
                 task.importantLevel = Int16(importLevelSegCtrl.selectedSegmentIndex)
-                task.deadline = datePicker.date as NSDate?
+                task.deadline = deadline as NSDate?
+                task.group = Int16(groupSegCtrl.selectedSegmentIndex)
                 task.createTime = Date() as NSDate?
             }
             do {
                 try managedContext.save()
-                //(UIApplication.shared.delegate as! AppDelegate).saveContext()
             } catch {
                 print("failed to save context in adding tase")
             }

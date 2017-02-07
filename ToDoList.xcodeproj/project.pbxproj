@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		BE8DCE561E492A3F00E2A65D /* testVCViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE8DCE551E492A3F00E2A65D /* testVCViewController.swift */; };
 		BEB11BBA1E41327B00A632B5 /* ThingToDo+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEB11BB81E41327B00A632B5 /* ThingToDo+CoreDataClass.swift */; };
 		BEB11BBB1E41327B00A632B5 /* ThingToDo+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEB11BB91E41327B00A632B5 /* ThingToDo+CoreDataProperties.swift */; };
 		BEB11BC11E41376E00A632B5 /* ColoredCircleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEB11BC01E41376E00A632B5 /* ColoredCircleView.swift */; };
@@ -32,6 +33,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		BE8DCE551E492A3F00E2A65D /* testVCViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = testVCViewController.swift; sourceTree = "<group>"; };
 		BEB11BB81E41327B00A632B5 /* ThingToDo+CoreDataClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "ThingToDo+CoreDataClass.swift"; sourceTree = "<group>"; };
 		BEB11BB91E41327B00A632B5 /* ThingToDo+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "ThingToDo+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		BEB11BC01E41376E00A632B5 /* ColoredCircleView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ColoredCircleView.swift; sourceTree = "<group>"; };
@@ -93,6 +95,7 @@
 				BEB11BC01E41376E00A632B5 /* ColoredCircleView.swift */,
 				BEF383951E3F00DA005562EB /* AppDelegate.swift */,
 				BEF383991E3F00DA005562EB /* Main.storyboard */,
+				BE8DCE551E492A3F00E2A65D /* testVCViewController.swift */,
 				BEB11BC21E41A50400A632B5 /* TaskTableViewCell.swift */,
 				BEF383BA1E3F0585005562EB /* AddViewController.swift */,
 				BEF383B81E3F018F005562EB /* ToDoTableViewController.swift */,
@@ -232,6 +235,7 @@
 				BEB11BC31E41A50400A632B5 /* TaskTableViewCell.swift in Sources */,
 				BEF383BB1E3F0585005562EB /* AddViewController.swift in Sources */,
 				BEB11BBB1E41327B00A632B5 /* ThingToDo+CoreDataProperties.swift in Sources */,
+				BE8DCE561E492A3F00E2A65D /* testVCViewController.swift in Sources */,
 				BEF383961E3F00DA005562EB /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
