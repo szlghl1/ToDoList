@@ -7,13 +7,14 @@
 //
 
 import Foundation
+import UIKit
 
 class LocalNotification {
     func addNotification(forTask: ThingToDo) {
         let localNoti = UILocalNotification()
         
         let fireDate = forTask.deadline
-        localNoti.fireDate = fireDate
+        localNoti.fireDate = fireDate as Date?
         
         localNoti.alertBody = "\(forTask.title) is dued."
         localNoti.soundName = UILocalNotificationDefaultSoundName
@@ -21,9 +22,9 @@ class LocalNotification {
         localNoti.applicationIconBadgeNumber = 1
         
         // information (key-value pair) binding to the notification
-        localNoti.info = ["uuid": forTask.uuid!]
+        localNoti.userInfo = ["uuid": forTask.uuid!]
         
-        UIApplication.sharedApplication().scheduleLocalNotification(localNoti)
+        UIApplication.shared.scheduleLocalNotification(localNoti)
     }
     
     func removeNotification(forTask: ThingToDo) -> RemoveResult {
@@ -31,11 +32,11 @@ class LocalNotification {
             return .fail
         }
         
-        if let locals = UIApplication.sharedApplication().scheduledLocalNotifications {
+        if let locals = UIApplication.shared.scheduledLocalNotifications {
             for localNoti in locals {
-                if let infoDict = localNoti.info {
-                    if dict.keys.contains("uuid") && (dict["uuid"] as? String) == forTask.uuid! {
-                        UIApplication.sharedApplication().cancelLocalNotification(localNoti)
+                if let infoDict = localNoti.userInfo {
+                    if infoDict.keys.contains("uuid") && (infoDict["uuid"] as? String) == forTask.uuid! {
+                        UIApplication.shared.cancelLocalNotification(localNoti)
                     }
                 }
             }

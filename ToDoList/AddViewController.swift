@@ -15,10 +15,7 @@ class AddViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var detailTextField: UITextField!
     @IBOutlet weak var importLevelSegCtrl: UISegmentedControl!
     @IBOutlet weak var deadlineTextField: UITextField!
-    //group
-    
     @IBOutlet weak var groupSegCtrl: UISegmentedControl!
-    let managedContext = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
     var deadline = Date()
     let datePicker = UIDatePicker()
     
@@ -95,18 +92,7 @@ class AddViewController: UIViewController, UITextFieldDelegate {
             alert.addAction(action)
             present(alert, animated: true, completion: nil)
         } else {
-            if let task = NSEntityDescription.insertNewObject(forEntityName: "ThingToDo", into: managedContext) as? ThingToDo {
-                task.title = titleTextField.text
-                task.detail = titleTextField.text
-                task.importantLevel = Int16(importLevelSegCtrl.selectedSegmentIndex)
-                task.deadline = deadline as NSDate?
-                task.group = Int16(groupSegCtrl.selectedSegmentIndex)
-            }
-            do {
-                try managedContext.save()
-            } catch {
-                print("failed to save context in adding task")
-            }
+            _ = ToDoList.addTask(title: titleTextField.text!, detail: detailTextField.text!, importantLevel: importLevelSegCtrl.selectedSegmentIndex, deadline: deadline, group: groupSegCtrl.selectedSegmentIndex)
             _ = navigationController?.popViewController(animated: true)
         }
     }

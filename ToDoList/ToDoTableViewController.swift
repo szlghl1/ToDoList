@@ -10,11 +10,8 @@ import UIKit
 import Foundation
 import CoreData
 
-public let numOfImportLevel:Int = 4
-
 class ToDoTableViewController: UITableViewController {
     
-    let managedContext = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
     var thingsToDo:[[ThingToDo]] = Array(repeating: [ThingToDo](), count: numOfImportLevel)
     enum IdentifierOfCells: String {
         case BasicCell = "BasicCell"
@@ -24,7 +21,8 @@ class ToDoTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        //preloadTestData()
+        preloadTestData()
+        
         fetchAll()
         tableView.reloadData()
         
@@ -86,15 +84,7 @@ class ToDoTableViewController: UITableViewController {
     
     func fetchAll() {
         for i in 0..<numOfImportLevel {
-            
-            let request:NSFetchRequest<ThingToDo> = ThingToDo.fetchRequest()
-            
-            
-            //NSPredicates created with predicateWithBlock: cannot be used for Core Data fetch requests backed by a SQLite store.
-            request.predicate = NSPredicate(format: "importantLevel = %d", i)
-            
-            let thingsInThisLevel = try! managedContext.fetch(request)
-            thingsToDo[i] = thingsInThisLevel
+            thingsToDo[i] = ToDoList.getTasksByImportLevel(importantLevel: i)
         }
     }
     
@@ -108,27 +98,16 @@ class ToDoTableViewController: UITableViewController {
             wrappedFlag.runned = true
         }
         for i in 0..<numOfImportLevel {
-            if let thing = NSEntityDescription.insertNewObject(forEntityName: "ThingToDo", into: managedContext) as? ThingToDo {
-                thing.title = "Task in level \(i)"
-                thing.detail = "detail"
-                thing.importantLevel = Int16(i)
-                thing.deadline = NSDate(timeIntervalSinceNow: 20000)
-                thing.group = Int16(i)
-                thingsToDo[i].append(thing)
+            if let task = ToDoList.addTask(title: "Task in level \(i)", detail: "detail", importantLevel: i, deadline: Date(timeIntervalSinceNow: 50), group: i) {
+                thingsToDo[i].append(task)
             }
         }
     }
     
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
-            managedContext.delete(thingsToDo[indexPath.section][indexPath.row])
-            do {
-                try managedContext.save()
-            } catch {
-                print("failed to save context in deleting")
-            }
+            ToDoList.removeTask(task: thingsToDo[indexPath.section][indexPath.row])
             thingsToDo[indexPath.section].remove(at: indexPath.row)
-            //fetchSection(section: indexPath.section)
             tableView.reloadSections([indexPath.section], with: UITableViewRowAnimation.fade)
         }
     }
@@ -140,13 +119,7 @@ class ToDoTableViewController: UITableViewController {
 
     func fetchSection(section: Int) {
         if section < numOfImportLevel {
-            let request:NSFetchRequest<ThingToDo> = ThingToDo.fetchRequest()
-            request.predicate = NSPredicate(format: "importantLevel = %d", section)
-            do {
-                try thingsToDo[section] = managedContext.fetch(request)
-            } catch {
-                print("failed to fetch section \(section)")
-            }
+            thingsToDo[section] = ToDoList.getTasksByImportLevel(importantLevel: section)
         }
     }
     
