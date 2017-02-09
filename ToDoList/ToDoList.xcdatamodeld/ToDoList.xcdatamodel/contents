@@ -1,14 +1,15 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="11759" systemVersion="16D32" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
     <entity name="ThingToDo" representedClassName="ThingToDo" syncable="YES">
-        <attribute name="createTime" optional="YES" attributeType="Date" defaultDateTimeInterval="507589680" usesScalarValueType="NO" syncable="YES"/>
-        <attribute name="deadline" optional="YES" attributeType="Date" defaultDateTimeInterval="539125620" usesScalarValueType="NO" syncable="YES"/>
+        <attribute name="createTime" optional="YES" attributeType="Date" defaultDateTimeInterval="-975639120" usesScalarValueType="NO" syncable="YES"/>
+        <attribute name="deadline" optional="YES" attributeType="Date" defaultDateTimeInterval="-975639180" usesScalarValueType="NO" syncable="YES"/>
         <attribute name="detail" optional="YES" attributeType="String" defaultValueString="Default detail" syncable="YES"/>
         <attribute name="group" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="importantLevel" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
-        <attribute name="title" optional="YES" attributeType="String" defaultValueString="Title" syncable="YES"/>
+        <attribute name="title" attributeType="String" defaultValueString="Title" syncable="YES"/>
+        <attribute name="uuid" attributeType="String" indexed="YES" syncable="YES"/>
     </entity>
     <elements>
-        <element name="ThingToDo" positionX="-63" positionY="-18" width="128" height="135"/>
+        <element name="ThingToDo" positionX="-63" positionY="-18" width="128" height="150"/>
     </elements>
 </model>

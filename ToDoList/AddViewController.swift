@@ -30,7 +30,7 @@ class AddViewController: UIViewController, UITextFieldDelegate {
         detailTextField.delegate = self
         
         //initialize deadline label context
-        deadlineTextField.placeholder = formatDate(Date())
+        deadlineTextField.placeholder = Date().toString()
         
         //dismiss input when touch
         let tapViewRecognizer = UITapGestureRecognizer(target: self, action: #selector(dismissInputTools))
@@ -71,7 +71,7 @@ class AddViewController: UIViewController, UITextFieldDelegate {
     
     func updateDeadline(sender: UIDatePicker) {
         deadline = sender.date
-        deadlineTextField.text = formatDate(deadline)
+        deadlineTextField.text = deadline.toString()
     }
     
     override func didReceiveMemoryWarning() {
@@ -96,6 +96,7 @@ class AddViewController: UIViewController, UITextFieldDelegate {
             present(alert, animated: true, completion: nil)
         } else {
             if let task = NSEntityDescription.insertNewObject(forEntityName: "ThingToDo", into: managedContext) as? ThingToDo {
+                task.uuid = UUID().uuidString
                 task.title = titleTextField.text
                 task.detail = titleTextField.text
                 task.importantLevel = Int16(importLevelSegCtrl.selectedSegmentIndex)
@@ -111,12 +112,6 @@ class AddViewController: UIViewController, UITextFieldDelegate {
             _ = navigationController?.popViewController(animated: true)
         }
     }
-    
-    func formatDate(_ date: Date) -> String {
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateStyle = .long
-        return dateFormatter.string(from: date)
-    }
 
     /*
     // MARK: - Navigation
@@ -128,4 +123,12 @@ class AddViewController: UIViewController, UITextFieldDelegate {
     }
     */
 
+}
+
+extension Date {
+    func toString(style: DateFormatter.Style = .long) -> String {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateStyle = style
+        return dateFormatter.string(from: self)
+    }
 }

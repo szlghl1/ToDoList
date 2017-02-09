@@ -109,6 +109,7 @@ class ToDoTableViewController: UITableViewController {
         }
         for i in 0..<numOfImportLevel {
             if let thing = NSEntityDescription.insertNewObject(forEntityName: "ThingToDo", into: managedContext) as? ThingToDo {
+                thing.uuid = UUID().uuidString
                 thing.title = "Task in level \(i)"
                 thing.detail = "detail"
                 thing.importantLevel = Int16(i)
@@ -128,8 +129,9 @@ class ToDoTableViewController: UITableViewController {
             } catch {
                 print("failed to save context in deleting")
             }
-            fetchSection(section: indexPath.section)
-            tableView.reloadSections([indexPath.section], with: UITableViewRowAnimation.automatic)
+            thingsToDo[indexPath.section].remove(at: indexPath.row)
+            //fetchSection(section: indexPath.section)
+            tableView.reloadSections([indexPath.section], with: UITableViewRowAnimation.fade)
         }
     }
     

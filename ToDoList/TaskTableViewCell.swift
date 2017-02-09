@@ -21,11 +21,12 @@ class TaskTableViewCell: UITableViewCell {
     }
     var deadline = Date() {
         willSet {
-            let calendar = Calendar.current
-            let components = calendar.dateComponents([.year, .month, .day], from: newValue)
-            var str = String(describing: components.year!)
-            str += "-\(components.month!)-\(components.day!)"
-            deadlineLabel.text = str
+            deadlineLabel.text = newValue.toString(style: .short)
+            if newValue.timeIntervalSinceNow < 0 {
+                deadlineLabel.textColor = UIColor.red
+            } else {
+                deadlineLabel.textColor = UIColor.black
+            }
         }
     }
     var group = 0 {

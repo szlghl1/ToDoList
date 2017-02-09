@@ -7,8 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		BEB11BBA1E41327B00A632B5 /* ThingToDo+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEB11BB81E41327B00A632B5 /* ThingToDo+CoreDataClass.swift */; };
-		BEB11BBB1E41327B00A632B5 /* ThingToDo+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEB11BB91E41327B00A632B5 /* ThingToDo+CoreDataProperties.swift */; };
+		BE9034B41E49881100900E91 /* README.md in Sources */ = {isa = PBXBuildFile; fileRef = BE9034B31E49881100900E91 /* README.md */; };
+		BE9034B61E4BDAC300900E91 /* LocalNotification.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE9034B51E4BDAC300900E91 /* LocalNotification.swift */; };
+		BE9034B91E4C21A600900E91 /* ThingToDo+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE9034B71E4C21A600900E91 /* ThingToDo+CoreDataClass.swift */; };
+		BE9034BA1E4C21A600900E91 /* ThingToDo+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE9034B81E4C21A600900E91 /* ThingToDo+CoreDataProperties.swift */; };
 		BEB11BC11E41376E00A632B5 /* ColoredCircleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEB11BC01E41376E00A632B5 /* ColoredCircleView.swift */; };
 		BEB11BC31E41A50400A632B5 /* TaskTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEB11BC21E41A50400A632B5 /* TaskTableViewCell.swift */; };
 		BEF383961E3F00DA005562EB /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEF383951E3F00DA005562EB /* AppDelegate.swift */; };
@@ -32,8 +34,10 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		BEB11BB81E41327B00A632B5 /* ThingToDo+CoreDataClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "ThingToDo+CoreDataClass.swift"; sourceTree = "<group>"; };
-		BEB11BB91E41327B00A632B5 /* ThingToDo+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "ThingToDo+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		BE9034B31E49881100900E91 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		BE9034B51E4BDAC300900E91 /* LocalNotification.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocalNotification.swift; sourceTree = "<group>"; };
+		BE9034B71E4C21A600900E91 /* ThingToDo+CoreDataClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "ThingToDo+CoreDataClass.swift"; path = "ToDoList/ThingToDo+CoreDataClass.swift"; sourceTree = "<group>"; };
+		BE9034B81E4C21A600900E91 /* ThingToDo+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "ThingToDo+CoreDataProperties.swift"; path = "ToDoList/ThingToDo+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		BEB11BC01E41376E00A632B5 /* ColoredCircleView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ColoredCircleView.swift; sourceTree = "<group>"; };
 		BEB11BC21E41A50400A632B5 /* TaskTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TaskTableViewCell.swift; sourceTree = "<group>"; };
 		BEF383921E3F00DA005562EB /* ToDoList.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ToDoList.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -71,6 +75,7 @@
 		BEF383891E3F00D9005562EB = {
 			isa = PBXGroup;
 			children = (
+				BE9034B31E49881100900E91 /* README.md */,
 				BEF383C01E3FEFE6005562EB /* Model */,
 				BEF383941E3F00DA005562EB /* ToDoList */,
 				BEF383AC1E3F00DA005562EB /* ToDoListTests */,
@@ -90,6 +95,7 @@
 		BEF383941E3F00DA005562EB /* ToDoList */ = {
 			isa = PBXGroup;
 			children = (
+				BE9034B51E4BDAC300900E91 /* LocalNotification.swift */,
 				BEB11BC01E41376E00A632B5 /* ColoredCircleView.swift */,
 				BEF383951E3F00DA005562EB /* AppDelegate.swift */,
 				BEF383991E3F00DA005562EB /* Main.storyboard */,
@@ -116,8 +122,8 @@
 		BEF383C01E3FEFE6005562EB /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				BEB11BB81E41327B00A632B5 /* ThingToDo+CoreDataClass.swift */,
-				BEB11BB91E41327B00A632B5 /* ThingToDo+CoreDataProperties.swift */,
+				BE9034B71E4C21A600900E91 /* ThingToDo+CoreDataClass.swift */,
+				BE9034B81E4C21A600900E91 /* ThingToDo+CoreDataProperties.swift */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -227,11 +233,13 @@
 			files = (
 				BEB11BC11E41376E00A632B5 /* ColoredCircleView.swift in Sources */,
 				BEF3839E1E3F00DA005562EB /* ToDoList.xcdatamodeld in Sources */,
-				BEB11BBA1E41327B00A632B5 /* ThingToDo+CoreDataClass.swift in Sources */,
+				BE9034BA1E4C21A600900E91 /* ThingToDo+CoreDataProperties.swift in Sources */,
 				BEF383B91E3F018F005562EB /* ToDoTableViewController.swift in Sources */,
 				BEB11BC31E41A50400A632B5 /* TaskTableViewCell.swift in Sources */,
 				BEF383BB1E3F0585005562EB /* AddViewController.swift in Sources */,
-				BEB11BBB1E41327B00A632B5 /* ThingToDo+CoreDataProperties.swift in Sources */,
+				BE9034B41E49881100900E91 /* README.md in Sources */,
+				BE9034B91E4C21A600900E91 /* ThingToDo+CoreDataClass.swift in Sources */,
+				BE9034B61E4BDAC300900E91 /* LocalNotification.swift in Sources */,
 				BEF383961E3F00DA005562EB /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
