@@ -8,15 +8,20 @@
 
 import Foundation
 import UIKit
+import UserNotifications
 
 class LocalNotification {
-    func addNotification(forTask: ThingToDo) {
+    static func addNotification(forTask: ThingToDo) {
+        
+        //let trigger = UNCalendarNotificationTrigger(dateMatching: , repeats: <#T##Bool#>)
+        
+        
         let localNoti = UILocalNotification()
         
         let fireDate = forTask.deadline
         localNoti.fireDate = fireDate as Date?
         
-        localNoti.alertBody = "\(forTask.title) is dued."
+        localNoti.alertBody = "\(forTask.title ?? "") is dued."
         localNoti.soundName = UILocalNotificationDefaultSoundName
         localNoti.alertAction = "Open my to do list"
         localNoti.applicationIconBadgeNumber = 1
@@ -27,7 +32,7 @@ class LocalNotification {
         UIApplication.shared.scheduleLocalNotification(localNoti)
     }
     
-    func removeNotification(forTask: ThingToDo) -> RemoveResult {
+    static func removeNotification(forTask: ThingToDo) -> RemoveResult {
         if forTask.uuid == nil {
             return .fail
         }
@@ -45,6 +50,10 @@ class LocalNotification {
         }
         
         return .fail
+    }
+    
+    private init() {
+        
     }
 }
 

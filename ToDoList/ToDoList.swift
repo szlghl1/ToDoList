@@ -33,6 +33,7 @@ class ToDoList {
             } catch {
                 print("failed to save context in adding task")
             }
+            LocalNotification.addNotification(forTask: task)
             return task
         }
         return nil
@@ -45,6 +46,7 @@ class ToDoList {
         } catch {
             print("failed to save context in deleting")
         }
+        LocalNotification.removeNotification(forTask: task)
     }
     
     static func getTasksByImportLevel(importantLevel: Int) -> [ThingToDo] {
