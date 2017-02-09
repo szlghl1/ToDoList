@@ -11,5 +11,9 @@ import CoreData
 
 @objc(ThingToDo)
 public class ThingToDo: NSManagedObject {
-
+    public override func awakeFromInsert() {
+        super.awakeFromInsert()
+        self.createTime = Date() as NSDate?
+        self.uuid = UUID().uuidString
+    }
 }

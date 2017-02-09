@@ -96,13 +96,11 @@ class AddViewController: UIViewController, UITextFieldDelegate {
             present(alert, animated: true, completion: nil)
         } else {
             if let task = NSEntityDescription.insertNewObject(forEntityName: "ThingToDo", into: managedContext) as? ThingToDo {
-                task.uuid = UUID().uuidString
                 task.title = titleTextField.text
                 task.detail = titleTextField.text
                 task.importantLevel = Int16(importLevelSegCtrl.selectedSegmentIndex)
                 task.deadline = deadline as NSDate?
                 task.group = Int16(groupSegCtrl.selectedSegmentIndex)
-                task.createTime = Date() as NSDate?
             }
             do {
                 try managedContext.save()

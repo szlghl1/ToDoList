@@ -109,11 +109,9 @@ class ToDoTableViewController: UITableViewController {
         }
         for i in 0..<numOfImportLevel {
             if let thing = NSEntityDescription.insertNewObject(forEntityName: "ThingToDo", into: managedContext) as? ThingToDo {
-                thing.uuid = UUID().uuidString
                 thing.title = "Task in level \(i)"
                 thing.detail = "detail"
                 thing.importantLevel = Int16(i)
-                thing.createTime = NSDate(timeIntervalSinceNow: 0)
                 thing.deadline = NSDate(timeIntervalSinceNow: 20000)
                 thing.group = Int16(i)
                 thingsToDo[i].append(thing)
