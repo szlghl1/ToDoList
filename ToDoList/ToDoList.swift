@@ -28,6 +28,8 @@ class ToDoList {
             task.importantLevel = Int16(importantLevel)
             task.deadline = deadline as NSDate?
             task.group = Int16(group)
+            task.createTime = NSDate()
+            task.uuid = UUID().uuidString
             do {
                 try managedContext.save()
             } catch {
@@ -40,13 +42,13 @@ class ToDoList {
     }
     
     static func removeTask(task: ThingToDo) {
+        LocalNotification.removeNotification(forTask: task)
         managedContext.delete(task)
         do {
             try managedContext.save()
         } catch {
             print("failed to save context in deleting")
         }
-        LocalNotification.removeNotification(forTask: task)
     }
     
     static func getTasksByImportLevel(importantLevel: Int) -> [ThingToDo] {
