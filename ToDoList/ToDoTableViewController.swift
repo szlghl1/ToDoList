@@ -9,6 +9,7 @@
 import UIKit
 import Foundation
 import CoreData
+import NotificationCenter
 
 class ToDoTableViewController: UITableViewController {
     
@@ -21,10 +22,9 @@ class ToDoTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        preloadTestData()
+        //preloadTestData()
         
-        fetchAll()
-        tableView.reloadData()
+        refreshAll()
         
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
@@ -36,8 +36,10 @@ class ToDoTableViewController: UITableViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        fetchAll()
-        tableView.reloadData()
+        refreshAll()
+        
+        let center = NotificationCenter.default
+        center.addObserver(self, selector: #selector(refreshAll), name: NSNotification.Name.UIApplicationWillEnterForeground, object: nil)
     }
 
     override func didReceiveMemoryWarning() {
@@ -82,10 +84,11 @@ class ToDoTableViewController: UITableViewController {
         return 70
     }
     
-    func fetchAll() {
+    func refreshAll() {
         for i in 0..<numOfImportLevel {
             thingsToDo[i] = ToDoList.getTasksByImportLevel(importantLevel: i)
         }
+        tableView.reloadData()
     }
     
     func preloadTestData() {
@@ -112,11 +115,6 @@ class ToDoTableViewController: UITableViewController {
         }
     }
     
-    //should be uncommented later when I want to add editing task funciton
-//    override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
-//        return false
-//    }
-
     func fetchSection(section: Int) {
         if section < numOfImportLevel {
             thingsToDo[section] = ToDoList.getTasksByImportLevel(importantLevel: section)

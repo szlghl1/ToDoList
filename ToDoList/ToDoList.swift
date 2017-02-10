@@ -62,4 +62,16 @@ class ToDoList {
         }
         return res
     }
+    
+    static func getTasksByPredicate(predicate: NSPredicate) -> [ThingToDo] {
+        var res: [ThingToDo] = []
+        let request:NSFetchRequest<ThingToDo> = ThingToDo.fetchRequest()
+        request.predicate = predicate
+        do {
+            try res = managedContext.fetch(request)
+        } catch {
+            print("failed to query by predicate")
+        }
+        return res
+    }
 }
